@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
@@ -26,7 +27,9 @@ class CallbackController extends Controller
         try {
             $socialiteUser = Socialite::driver('spotify')->user();
         } catch (Throwable $e) {
-            return redirect()->route('/');
+            Log::error('OAuth Error: '.$e->getMessage());
+
+            return redirect('/');
         }
 
         $user = User::updateOrCreate([
