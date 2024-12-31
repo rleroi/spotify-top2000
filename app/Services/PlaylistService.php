@@ -119,7 +119,8 @@ final readonly class PlaylistService
                 DB::raw('max(name) as name'),
                 DB::raw('max(length) as length'),
                 DB::raw('max(image) as image'),
-                DB::raw('ROUND(EXP(SUM(LOG(playlist_position)))) as playlist_position'),
+                DB::raw('avg(playlist_position) + count(*) * 100 as playlist_position'),
+                //DB::raw('ROUND(EXP(SUM(LOG(playlist_position)))) as playlist_position'),
             ])
             ->groupBy('spotify_id')
             ->orderByRaw('playlist_position desc')
