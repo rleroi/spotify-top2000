@@ -96,6 +96,9 @@ function login() {
                                         </h2>
 
                                         <p class="mt-4 text-sm/relaxed">
+                                            Listen to the playlist on Spotify.
+                                        </p>
+                                        <p class="mt-4 text-sm/relaxed">
                                             <secondary-button
                                                 @click.prevent="playlist"
                                             >
