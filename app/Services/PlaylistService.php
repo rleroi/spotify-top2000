@@ -113,7 +113,7 @@ final readonly class PlaylistService
         $totalAdded = 0;
         Song::query()
             ->select([
-                'spotify_id',
+                DB::raw('max(spotify_id) as spotify_id'),
                 DB::raw('max(spotify_artist_id) as spotify_artist_id'),
                 DB::raw('max(artist) as artist'),
                 DB::raw('max(name) as name'),
@@ -123,7 +123,7 @@ final readonly class PlaylistService
                 //DB::raw('ROUND(EXP(SUM(LOG(playlist_position)))) as playlist_position'),
             ])
             ->groupBy('spotify_id')
-            ->orderByRaw('playlist_position asc')
+            ->orderByRaw('playlist_position desc')
             ->chunk(self::GLOBAL_PER_PAGE, function (Collection $songs) use (&$totalAdded, &$playlist): bool {
                 $uris = $songs->map(fn(Song $song): string => 'spotify:track:' . $song->spotify_id);
                 $this->spotifyService->request(
@@ -145,7 +145,7 @@ final readonly class PlaylistService
 
     public function getTopArtists(): Collection
     {
-        $globalPlaylistId = Playlist::query()->where('name', 'global')->latest()->firstOrFail();
+        $globalPlaylistId = Playlist::query()->where('name', 'global')->latest()->firstOrFail()->id;
 
         return Song::query()
             ->select([
