@@ -12,8 +12,6 @@ const form = useForm({});
 
 const user = usePage().props.auth.user;
 
-console.log(user);
-
 function updateGlobalPlaylist() {
     form.post('/api/updateGlobalPlaylist', {
         preserveScroll: true,

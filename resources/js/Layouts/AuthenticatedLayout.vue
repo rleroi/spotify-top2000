@@ -45,6 +45,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Global Playlist
                                 </NavLink>
+                                <NavLink
+                                    :href="route('artists')"
+                                    :active="route().current('artists')"
+                                >
+                                    Artists
+                                </NavLink>
                             </div>
                         </div>
 
@@ -157,6 +163,12 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('global')"
                         >
                             Global Playlist
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('artists')"
+                            :active="route().current('artists')"
+                        >
+                            Artists
                         </ResponsiveNavLink>
                     </div>
 

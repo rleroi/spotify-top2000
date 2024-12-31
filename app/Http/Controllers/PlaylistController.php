@@ -41,6 +41,13 @@ final class PlaylistController extends Controller
         ]);
     }
 
+    public function artists(PlaylistService $playlistService): Response
+    {
+        return Inertia::render('Artists', [
+            'artists' => $playlistService->getTopArtists(),
+        ]);
+    }
+
     public function insertTopTracks(PlaylistService $playlistService): void
     {
         $user = Auth::user();

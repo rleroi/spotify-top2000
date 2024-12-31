@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [PlaylistController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/global', [PlaylistController::class, 'global'])->middleware(['auth', 'verified'])->name('global');
+Route::get('/artists', [PlaylistController::class, 'artists'])->middleware(['auth', 'verified'])->name('artists');
 
 Route::name('api.')
     ->prefix('/api')
