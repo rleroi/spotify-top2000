@@ -150,7 +150,13 @@ const showingNavigationDropdown = ref(false);
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
-                            Dashboard
+                            Your Top 100
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('global')"
+                            :active="route().current('global')"
+                        >
+                            Global Playlist
                         </ResponsiveNavLink>
                     </div>
 

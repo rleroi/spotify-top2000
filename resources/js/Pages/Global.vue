@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Head, useForm, router, usePage } from "@inertiajs/vue3";
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { Head, router, useForm, usePage } from '@inertiajs/vue3';
 
 defineProps<{
     playlist?: Object;
@@ -47,17 +47,10 @@ function openPlaylist() {
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"
                 >
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <div class="flex mb-6 gap-6">
-                            <secondary-button
-                                @click.prevent="openPlaylist"
-                            >
-                                <img
-                                    src="/img/spotify.png"
-                                    class="h-9"
-                                />
-                                <span class="ml-4"
-                                >Listen to Playlist</span
-                                >
+                        <div class="mb-6 flex gap-6">
+                            <secondary-button @click.prevent="openPlaylist">
+                                <img src="/img/spotify.png" class="h-9" />
+                                <span class="ml-4">Listen to Playlist</span>
                             </secondary-button>
                             <primary-button
                                 v-if="user.is_global_user"
@@ -74,7 +67,8 @@ function openPlaylist() {
                                     <td></td>
                                     <td>Name</td>
                                     <td>Artist</td>
-                                    <td></td>
+                                    <td class="hidden sm:block"></td>
+                                    <td>Score</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,12 +79,15 @@ function openPlaylist() {
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ song.name }}</td>
                                     <td>{{ song.artist }}</td>
-                                    <td>
+                                    <td class="hidden min-w-12 sm:block px-2">
                                         <img
-                                            class="object-cover h-12"
+                                            class="h-12 object-cover"
                                             :src="song.image"
                                             alt="cover"
                                         />
+                                    </td>
+                                    <td class="text-right">
+                                        {{ song.playlist_position }}
                                     </td>
                                 </tr>
                             </tbody>

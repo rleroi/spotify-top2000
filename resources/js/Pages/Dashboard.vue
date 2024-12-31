@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, router } from '@inertiajs/vue3';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { Head, router, useForm } from '@inertiajs/vue3';
 
 defineProps<{
     playlist?: Object;
@@ -61,9 +60,9 @@ function insertTopTracks() {
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ song.name }}</td>
                                     <td>{{ song.artist }}</td>
-                                    <td>
+                                    <td class="min-w-12 pl-2">
                                         <img
-                                            class="object-cover h-12"
+                                            class="h-12 w-12 object-cover"
                                             :src="song.image"
                                             alt="cover"
                                         />
